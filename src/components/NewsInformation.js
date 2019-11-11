@@ -7,12 +7,12 @@ const NewsInformation = props => {
   } = props;
 
   return (
-    <React.Fragment>
+    <div className="news-information">
       <p>Title. {news.title}</p>
       <p>By. {news.by}</p>
       <p>time. {news.time}</p>
       <p>url. {news.url}</p>
-    </React.Fragment>
+    </div>
   );
 };
 

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import NewsInformation from './NewsInformation';
 
-export default class Header extends Component {
+export default class News extends Component {
   state = {
     news: {
       isLoading: false,

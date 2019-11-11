@@ -10,6 +10,7 @@ import logo from './logo.svg';
 import './App.css';
 import Home from './components/Home'
 import News from './components/News'
+import TopNews from './components/TopNews'
 
 class App extends Component {
   render() {
@@ -25,7 +26,7 @@ class App extends Component {
                 <Link to="/news">News</Link>
               </li>
               <li>
-                <Link to="/users">Users</Link>
+                <Link to="/topNews">Top News</Link>
               </li>
             </ul>
           </nav>
@@ -34,8 +35,8 @@ class App extends Component {
             <Route path="/news">
               <News />
             </Route>
-            <Route path="/users">
-              <Users />
+            <Route path="/topNews">
+              <TopNews />
             </Route>
             <Route path="/">
               <Home />
@@ -45,10 +46,6 @@ class App extends Component {
       </Router>
     );
   }
-}
-
-function Users() {
-  return <h2>Users</h2>;
 }
 
 export default App;
