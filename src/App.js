@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+
+import logo from './logo.svg';
+import './App.css';
+import Home from './components/Home'
+import News from './components/News'
 
 class App extends Component {
   render() {
@@ -20,7 +22,7 @@ class App extends Component {
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="/about">About</Link>
+                <Link to="/news">News</Link>
               </li>
               <li>
                 <Link to="/users">Users</Link>
@@ -29,8 +31,8 @@ class App extends Component {
           </nav>
 
           <Switch>
-            <Route path="/about">
-              <About />
+            <Route path="/news">
+              <News />
             </Route>
             <Route path="/users">
               <Users />
@@ -43,14 +45,6 @@ class App extends Component {
       </Router>
     );
   }
-}
-
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function About() {
-  return <h2>About</h2>;
 }
 
 function Users() {
