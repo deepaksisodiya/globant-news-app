@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import NewsInformation from './NewsInformation';
 
-export default class News extends Component {
+class News extends Component {
   state = {
-    news: {
-      isLoading: false,
-      isError: false,
-      data: null,
-    },
     newsId: '',
+  };
+
+  propTypes = {
+    isLoading: PropTypes.bool.isRequired,
+    isError: PropTypes.bool.isRequired,
+    data: PropTypes.object.isRequired,
   };
 
   handleChange = (event) => {
@@ -18,31 +20,12 @@ export default class News extends Component {
   }
 
   handleSubmit = (event) => {
-    this.getUser();
+    this.props.getNews(this.state.newsId);
     event.preventDefault();
   }
 
-  async getUser() {
-    let news = { ...this.state.news, isLoading: true, }
-    this.setState({
-      news,
-    });
-    try {
-      const response = await axios.get(`https://hacker-news.firebaseio.com/v0/item/${this.state.newsId}.json?print=pretty`);
-      news = { ...this.state.news, isLoading: false, data: response.data }
-      this.setState({
-        news,
-      });
-    } catch (error) {
-      news = { ...this.state.news, isError: true, isLoading: false }
-      this.setState({
-        news,
-      });
-    }
-  }
-
   renderNewsInformation = () => {
-    const { isLoading, isError, data } = this.state.news;
+    const { isLoading, isError, data } = this.props;
     if (isLoading) {
       return <div>Loading</div>
     } else if (isError) {
@@ -53,7 +36,7 @@ export default class News extends Component {
   }
 
   render() {
-    console.log(this.state.news);
+    console.log(this.props.data);
     return (
       <React.Fragment>
         <form onSubmit={this.handleSubmit}>
@@ -68,3 +51,24 @@ export default class News extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.news.isLoading,
+    isError: state.news.isError,
+    data: state.news.data,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getNews: (newsId) => {
+      dispatch({
+        type: 'NEWS_FETCH_REQUESTED',
+        payload: newsId
+      });
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(News);
