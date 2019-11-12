@@ -19,7 +19,11 @@ class News extends Component {
 
   componentDidMount() {
     const newsId = this.props.match.params.newsId;
-    if (newsId) this.props.getNews(newsId);
+    if (newsId) {
+      this.setState({ newsId }, () => {
+        this.props.getNews(newsId);
+      });
+    }
   }
 
   handleChange = (event) => {
