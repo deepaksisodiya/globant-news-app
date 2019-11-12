@@ -3,15 +3,20 @@ import PropTypes from 'prop-types';
 
 const NewsInformation = props => {
   const {
-    news
+    news: {
+      title,
+      by,
+      time,
+      url
+    }
   } = props;
 
   return (
     <div className="card">
-      <p><b>Title: </b>{news.title}</p>
-      <p><b>By: </b>{news.by}</p>
-      <p><b>Time: </b>{news.time}</p>
-      <p><b>URL: </b>{news.url}</p>
+      <p><b>Title: </b>{title}</p>
+      <p><b>By: </b>{by}</p>
+      <p><b>Time: </b>{new Date(time).toDateString()}</p>
+      <p><b>URL: </b>{url}</p>
     </div>
   );
 };
