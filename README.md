@@ -8,7 +8,7 @@
 
 ```
 git clone https://github.com/deepaksisodiya/globant-news-app.git
-npm install
+yarn install
 ```
 
 ## How to run the app
