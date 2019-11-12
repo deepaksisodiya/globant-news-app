@@ -19,7 +19,7 @@ class News extends Component {
 
   componentDidMount() {
     const newsId = this.props.match.params.newsId;
-    this.props.getNews(newsId);
+    if (newsId) this.props.getNews(newsId);
   }
 
   handleChange = (event) => {
@@ -45,12 +45,10 @@ class News extends Component {
   render() {
     return (
       <React.Fragment>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            News id:
+        <form onSubmit={this.handleSubmit} className="form">
+          <label>News id</label>
           <input type="text" name="newsId" value={this.state.newsId} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Submit" className="button" />
         </form>
         {this.renderNewsInformation()}
       </React.Fragment>

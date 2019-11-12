@@ -7,11 +7,11 @@ const NewsInformation = props => {
   } = props;
 
   return (
-    <div className="news-information">
-      <p>Title. {news.title}</p>
-      <p>By. {news.by}</p>
-      <p>time. {news.time}</p>
-      <p>url. {news.url}</p>
+    <div className="card">
+      <p><b>Title: </b>{news.title}</p>
+      <p><b>By: </b>{news.by}</p>
+      <p><b>Time: </b>{news.time}</p>
+      <p><b>URL: </b>{news.url}</p>
     </div>
   );
 };

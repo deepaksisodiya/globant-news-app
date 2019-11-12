@@ -2,12 +2,12 @@ import React from 'react';
 
 const Home = () => {
   return (
-    <React.Fragment>
-      <div>Name: Deepak Sisodiya</div>
-      <div>Position: Full Stack JavaScript Developer</div>
-      <div>Email id: deepak.sisodiya@gmail.com</div>
-      <div>Place: Pune</div>
-    </React.Fragment>
+    <div className="card">
+      <p>Name: Deepak Sisodiya</p>
+      <p>Position: Full Stack JavaScript Developer</p>
+      <p>Email id: deepak.sisodiya@gmail.com</p>
+      <p>Place: Pune</p>
+    </div>
   );
 };
 
