@@ -1,68 +1,34 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import NewsInformation from './NewsInformation';
 
-export default class TopNews extends Component {
-  state = {
-    topNews: {
-      isLoading: false,
-      isError: false,
-      data: [],
-    }
+class TopNews extends Component {
+
+  propTypes = {
+    isLoading: PropTypes.bool.isRequired,
+    isError: PropTypes.bool.isRequired,
+    data: PropTypes.object.isRequired,
+    getNews: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
-    this.gettopNewsIds();
-  }
-
-  async gettopNewsIds() {
-    let topNews = { ...this.state.topNews, isLoading: true, }
-    this.setState({
-      topNews,
-    });
-    try {
-      const response = await axios.get('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty');
-      const topsNewsIdArr = response.data.slice(0, 15);
-      const topNewsArr = [];
-      topsNewsIdArr.forEach(async (newsId, index, arr) => {
-        const response = await axios.get(`https://hacker-news.firebaseio.com/v0/item/${newsId}.json?print=pretty`);
-        console.log(response.data);
-        topNewsArr.push(response.data);
-
-        console.log('index', index);
-        console.log('arr', arr.length);
-
-        if (index === arr.length - 1) {
-          topNews = { ...this.state.topNews, isLoading: false, data: topNewsArr }
-          this.setState({
-            topNews,
-          });
-        }
-      });
-
-    } catch (error) {
-      topNews = { ...this.state.topNews, isError: true, isLoading: false }
-      this.setState({
-        topNews,
-      });
-    }
+    this.props.getTopNews();
   }
 
   renderTopNews() {
-    const { isLoading, isError, data } = this.state.topNews;
+    const { isLoading, isError, data } = this.props;
     if (isLoading) {
       return <div>Loading</div>
     } else if (isError) {
       return <div>Error in fetch data</div>
     } else if (data) {
-      console.log('data ', data);
       return data.map((news, index) => <NewsInformation news={news} key={index} />)
     }
   }
 
   render() {
-    console.log(this.state.topNews);
     return (
       <React.Fragment>
         {this.renderTopNews()}
@@ -70,3 +36,23 @@ export default class TopNews extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.topNews.isLoading,
+    isError: state.topNews.isError,
+    data: state.topNews.data,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getTopNews: () => {
+      dispatch({
+        type: 'TOPNEWS_FETCH_REQUESTED',
+      });
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopNews);

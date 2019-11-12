@@ -4,22 +4,22 @@ const initialState = {
   data: null,
 };
 
-const NewsReducer = (state = initialState, action) => {
+const topNewsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'NEWS_FETCH_REQUESTED':
+    case 'TOPNEWS_FETCH_REQUESTED':
       state = {
         ...state,
         isLoading: true,
       };
       break;
-    case 'NEWS_FETCH_FAILED':
+    case 'TOPNEWS_FETCH_FAILED':
       state = {
         ...state,
         isLoading: false,
         isError: true,
       };
       break;
-    case 'NEWS_FETCH_SUCCEEDED':
+    case 'TOPNEWS_FETCH_SUCCEEDED':
       state = {
         ...state,
         isLoading: false,
@@ -31,4 +31,4 @@ const NewsReducer = (state = initialState, action) => {
   return state;
 };
 
-export default NewsReducer;
+export default topNewsReducer;

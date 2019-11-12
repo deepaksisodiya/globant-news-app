@@ -13,6 +13,7 @@ class News extends Component {
     isLoading: PropTypes.bool.isRequired,
     isError: PropTypes.bool.isRequired,
     data: PropTypes.object.isRequired,
+    getNews: PropTypes.func.isRequired,
   };
 
   handleChange = (event) => {
@@ -36,7 +37,6 @@ class News extends Component {
   }
 
   render() {
-    console.log(this.props.data);
     return (
       <React.Fragment>
         <form onSubmit={this.handleSubmit}>
