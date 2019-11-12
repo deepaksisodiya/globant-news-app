@@ -27,6 +27,11 @@ const NewsReducer = (state = initialState, action) => {
         data: action.payload
       };
       break;
+    default:
+      state = {
+        ...initialState
+      };
+      break;
   }
   return state;
 };

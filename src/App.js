@@ -6,7 +6,6 @@ import {
   Link
 } from "react-router-dom";
 
-import logo from './logo.svg';
 import './App.css';
 import Home from './components/Home'
 import News from './components/News'
@@ -32,7 +31,7 @@ class App extends Component {
           </nav>
 
           <Switch>
-            <Route path="/news">
+            <Route path="/news/:newsId?">
               <News />
             </Route>
             <Route path="/topNews">

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { withRouter } from "react-router-dom";
 
 import NewsInformation from './NewsInformation';
 
@@ -15,6 +16,11 @@ class News extends Component {
     data: PropTypes.object.isRequired,
     getNews: PropTypes.func.isRequired,
   };
+
+  componentDidMount() {
+    const newsId = this.props.match.params.newsId;
+    this.props.getNews(newsId);
+  }
 
   handleChange = (event) => {
     this.setState({ newsId: event.target.value });
@@ -71,4 +77,5 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(News);
+const NewsWithRouter = withRouter(News);
+export default connect(mapStateToProps, mapDispatchToProps)(NewsWithRouter);
