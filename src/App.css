@@ -1,3 +1,23 @@
 .news-information {
   border: 1px solid black;
 }
+
+.header {
+  display: flex;
+  padding: 60px;
+  background-color: #f1f1f1;
+  color: white;
+  font-size: 30px;
+  list-style-type: none;
+}
+
+.header li {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
+}

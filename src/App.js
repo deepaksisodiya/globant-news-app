@@ -17,7 +17,7 @@ class App extends Component {
       <Router>
         <div>
           <nav>
-            <ul>
+            <ul className="header">
               <li>
                 <Link to="/">Home</Link>
               </li>
